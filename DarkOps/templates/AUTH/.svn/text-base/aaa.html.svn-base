@@ -1,0 +1,19 @@
+{% extends "AUTH/navbar.html" %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+{% block content %}
+<body>
+            {% for message in message_list %}
+                <div class="">
+                    {% autoescape off %}
+                    {{ message.detail }}
+                    {% endautoescape %}
+				</div>
+            {% endfor %}
+</body>
+{% endblock %}

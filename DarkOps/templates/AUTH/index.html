@@ -1,0 +1,117 @@
+{% extends "AUTH/navbar.html" %}
+<meta charset="UTF-8">
+{% block title %}<title>DarkOps-首页</title>{% endblock %}
+{% block content %}
+ <style>
+    body{
+        color:#333;
+        font:12px/1.3 'Arial','Microsoft YaHei';
+    }
+    #pn{
+        width: 650px;
+        height: auto;
+        background: #fff;
+        margin: 0 auto;
+        padding: 5px;
+
+    }
+    #list0{
+        margin-bottom: 10px;
+    }
+    .title{
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+    .time{
+        color: #808080;
+        margin-bottom: 2px;
+
+    }
+    .content{
+        display: none;
+        padding: 1px 0 3px;
+        line-height: 23px;
+        font-size: 14px;
+    }
+    .btm{
+        text-align: right;
+        height: 30px;
+
+    }
+
+    .hidd{
+        color: #eb7350;
+        margin-left: 5px;
+
+    }
+    .show{
+        color: #eb7350;
+        margin-left: 5px;
+    }
+    .zy{
+        padding: 1px 0 3px;
+        line-height: 23px;
+        font-size: 14px;
+
+    }
+    .box{
+     width: 500px;
+     margin: 20px auto;
+    }
+    .box1{
+     margin-left: 10px;
+     overflow: hidden;
+    }
+</style>
+<body>
+   <div class="box">
+    <div class="box1">
+            <h2>欢迎来到DarkOps运维管理系统</h2>
+    </div>
+   </div>
+
+
+        {% for message in message_list %}
+            <div id="pn">
+         <div id="box">
+        <p class="title">{{ message.message_name }}</p>
+        <p class="time">{{ message.author }}&nbsp;&nbsp;&nbsp;{{ message.add_time }}</p>
+        <p class="zy">
+            {% autoescape off %}
+            {{ message.detail }}
+            {% endautoescape %}
+
+        </p>
+    </div>
+            </div>
+   {% endfor %}
+
+<script type="text/javascript">
+function show(){
+var box = document.getElementById("box");
+var text = box.innerHTML;
+var newBox = document.createElement("div");
+var btn = document.createElement("a");
+newBox.innerHTML = text.substring(0,200);
+btn.innerHTML = text.length > 200 ? "...显示全部" : "";
+btn.href = "###";
+btn.onclick = function(){
+if (btn.innerHTML == "...显示全部"){
+btn.innerHTML = "收起";
+newBox.innerHTML = text;
+}else{
+btn.innerHTML = "...显示全部";
+newBox.innerHTML = text.substring(0,200);
+}
+}
+box.innerHTML = "";
+box.appendChild(newBox);
+box.appendChild(btn);
+}
+show();
+
+</script>
+    </body>
+{% endblock %}
+
